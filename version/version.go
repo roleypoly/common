@@ -2,7 +2,6 @@ package version
 
 import (
 	"fmt"
-	"io"
 )
 
 var (
@@ -11,14 +10,12 @@ var (
 	BuildDate = "unknown"
 )
 
-func WriteStartup(serviceName string, writer io.Writer) {
-	writer.Write(
-		[]byte(fmt.Sprintf(
-			"Starting %s service.\n Build %s (%s) at %s",
-			serviceName,
-			GitCommit,
-			GitBranch,
-			BuildDate,
-		)),
+func StartupInfo(serviceName string) string {
+	return fmt.Sprintf(
+		"Starting %s service.\n Build %s (%s) at %s",
+		serviceName,
+		GitCommit,
+		GitBranch,
+		BuildDate,
 	)
 }

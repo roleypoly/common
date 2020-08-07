@@ -1,7 +1,6 @@
 package version
 
 import (
-	"bytes"
 	"testing"
 	"time"
 )
@@ -11,10 +10,9 @@ func TestStartup(t *testing.T) {
 	GitCommit = "e5fa44f2b31c1fb553b6021e7360d07d5d91ff5e"
 	BuildDate = time.Now().UTC().Format("2006-01-02T15:04:05.000Z")
 
-	buffer := bytes.Buffer{}
 	expected := "Starting test service.\n Build e5fa44f2b31c1fb553b6021e7360d07d5d91ff5e (test) at " + BuildDate
-	WriteStartup("test", &buffer)
-	if buffer.String() != expected {
-		t.Error("Incorrect render, got `", buffer.String(), "`")
+	value := StartupInfo("test")
+	if value != expected {
+		t.Error("Incorrect render, got `", value, "`")
 	}
 }
